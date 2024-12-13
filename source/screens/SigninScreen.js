@@ -13,8 +13,6 @@ const SigninScreen = ({navigation}) => {
   
 
     return <View style = {styles.container}>
-        <View style = {{flex: 1, backgroundColor: "red"}}/>
-        <View style = {{flex: 4}}>
         <Spacer>
         <Text h2> Signup to Tracker</Text>
         </Spacer>
@@ -24,8 +22,6 @@ const SigninScreen = ({navigation}) => {
         <Spacer>
         <Button title={"Signup"}/> 
         </Spacer>
-        </View>
-        <View style = {{flex: 1, backgroundColor: "yellow"}}/>
     </View>
 }
 
@@ -33,8 +29,8 @@ const SigninScreen = ({navigation}) => {
 const styles = StyleSheet.create({
     container: {
         flex:1,
-        // justifyContent: "center",
-        // marginBottom: 250
+        justifyContent: "center",
+        marginBottom: 250
     }
 });
 
