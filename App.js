@@ -12,8 +12,6 @@ import TrackDetailScreen from './source/screens/TrackDetailScreen';
 import TrackListScreen from './source/screens/TrackListScreen';
 import AccountScreen from './source/screens/AccountScreen';
 
-const isSignIn = true
-
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
