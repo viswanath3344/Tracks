@@ -1,16 +1,21 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
-
+import { useContext, useEffect } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-import SigninScreen from './source/screens/SigninScreen';
-import SignupScreen from './source/screens/SignupScreen';
-import TrackCreateScreen from './source/screens/TrackCreateScreen';
+
+import SignInScreen from './source/screens/SignInScreen';
+import SignUpScreen from './source/screens/SignUpScreen';
+
 import TrackDetailScreen from './source/screens/TrackDetailScreen';
 import TrackListScreen from './source/screens/TrackListScreen';
 import AccountScreen from './source/screens/AccountScreen';
+
+import {Context as AuthContext, Provider as AuthProvider} from './source/context/authContext';
+//import AsyncStorage from '@react-native-async-storage/async-storage';
+
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -22,17 +27,28 @@ const TrackComponent = () => {
     </Stack.Navigator>
 }
 
-//TODO:
-const userToken = null;
 
-export default function App() {
+const App = function App() {
+  const {state} =  useContext(AuthContext);
+  const token = state.token;
+
+  // useEffect(() => {
+  //   const getDefaults = async () => {
+  //     token = await AsyncStorage.getItem("token");
+  //     console.log("token", token);
+  //   }
+
+  //   getDefaults();
+
+  // }, [])
+ 
   return (
     <NavigationContainer>
       {
-        userToken == null ? (
+        token == null ? (
         <Stack.Navigator>
-          <Stack.Screen name='SignIn' component={SigninScreen} /> 
-          <Stack.Screen name='Singup' component={SignupScreen} /> 
+          <Stack.Screen name='SignUp' component={SignUpScreen} /> 
+          <Stack.Screen name='SignIn' component={SignInScreen} /> 
          </Stack.Navigator>
          ) : (
           <Tab.Navigator screen>
@@ -43,6 +59,12 @@ export default function App() {
       }
     </NavigationContainer>
   )
+}
+
+export default () => {
+  return <AuthProvider>
+    <App />
+   </AuthProvider>
 }
 
 const styles = StyleSheet.create({

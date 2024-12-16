@@ -1,51 +1,39 @@
-import React, { useEffect, useState } from "react";
-import { StyleSheet, View} from "react-native";
-import { Button, Text, Input } from "@rneui/base";
-import Spacer from "../components/spacer";
+import React from "react";
+import { StyleSheet, View } from "react-native";
+import { useContext } from "react";
+import { Context as AuthContext } from "../context/authContext";
+import { useEffect } from "react";
+import NavLink from "../components/NavLink";
+import AuthForm from "../components/AuthForm";
 
-const SigninScreen = ({navigation}) => {
-    const [username, setUsername] = useState("");
-    const [password, setPassword] = useState("");
+
+const SignInScreen = ({ navigation }) => {
+    const { state, singIn } = useContext(AuthContext);
 
     useEffect(() => {
         navigation.setOptions({
             headerShown: false
         })
     }, [])
-  
-    return <View style = {styles.container}>
-        <Spacer>
-        <Text h3 marginBottom = {20}> Signup to Tracker</Text>
-        </Spacer>
 
-        <Input label = "Username" 
-        value= {username} 
-        onChangeText={setUsername} 
-        autoCapitalize="none"
-        autoCorrect = {false}
+    return <View style={styles.container}>
+        <AuthForm
+            headerTitle={"SignIn to Tracker!"}
+            onSubmit={singIn}
+            submitTitle={"Sign In"}
+            errorMessage={state.errorMessage}
         />
 
-        <Input 
-        label = "Password" 
-        value= {password} 
-        onChangeText={setPassword}
-        autoCapitalize="none"
-        autoCorrect = {false}
-        secureTextEntry
-        />
-        <Spacer>
-        <Button title={"Signup"}/> 
-        </Spacer>
+         <NavLink title={ "Don't you have an Account? Singup"} routeName={"SignUp"}/>
     </View>
 }
 
-
 const styles = StyleSheet.create({
     container: {
-        flex:1,
+        flex: 1,
         justifyContent: "center",
         marginBottom: 250
     }
 });
 
-export default SigninScreen;
+export default SignInScreen;
