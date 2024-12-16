@@ -5,13 +5,17 @@ import NavLink from "../components/NavLink";
 import AuthForm from "../components/AuthForm";
 
 const SignUpScreen = ({ navigation }) => {
-    const { state, signUp } = useContext(AuthContext);
+    const { state, signUp, clearErrorMessage } = useContext(AuthContext);
 
     useEffect(() => {
         navigation.setOptions({
             headerShown: false
         })
-    }, [])
+
+        const unsubscribe = navigation.addListener('blur', clearErrorMessage)
+        return unsubscribe;
+    }, [navigation])
+
 
     return <View style={styles.container}>
         <AuthForm

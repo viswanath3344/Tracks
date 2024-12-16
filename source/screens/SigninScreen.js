@@ -8,18 +8,22 @@ import AuthForm from "../components/AuthForm";
 
 
 const SignInScreen = ({ navigation }) => {
-    const { state, singIn } = useContext(AuthContext);
+    const { state, signIn, clearErrorMessage } = useContext(AuthContext);
 
     useEffect(() => {
         navigation.setOptions({
             headerShown: false
-        })
-    }, [])
+        });
+
+        const unsubscribe = navigation.addListener('blur', clearErrorMessage)
+        return unsubscribe;
+
+    }, [navigation])
 
     return <View style={styles.container}>
         <AuthForm
             headerTitle={"SignIn to Tracker!"}
-            onSubmit={singIn}
+            onSubmit={signIn}
             submitTitle={"Sign In"}
             errorMessage={state.errorMessage}
         />

@@ -6,9 +6,12 @@ const defaultPayload = { token: null, errorMessage: null }
 
 const reducer = (state, action) => {
   switch (action.type) {
-    case 'signup' || 'signin':
+    case 'signup':
       return action.payload
-
+      case 'signin': 
+      return action.payload
+    case 'clearError': 
+      return {...state, errorMessage: null}
     case 'signout':
       return defaultPayload
     default:
@@ -28,8 +31,6 @@ const getDefaults = () => {
 const signUp = (dispatch) => {
   return async (email, password) => {
     try {
-      console.log("email",email);
-      console.log("password", password);
       const response = await axios.post("/signup", { email, password });
       const { token } = response.data
       await AsyncStorage.setItem("token", token);
@@ -48,10 +49,10 @@ const signUp = (dispatch) => {
 }
 
 const signIn = (dispatch) => {
-  return async (username, password) => {
+  return async (email, password) => {
     try {
-      const response = await axios.post("/signin", { username, password });
-      const { token } = response.data
+      const response = await axios.post("/signin", { email, password });
+      const { token } = response.data;
       await AsyncStorage.setItem("token", token);
       dispatch({
         type: 'signin',
@@ -59,14 +60,13 @@ const signIn = (dispatch) => {
       })
     }
     catch (err) {
-      console.log(err)
       dispatch({
-        type: 'signin',
-        payload: { token: null, errorMessage: "Signup failed" }
+        type: 'signup',
+        payload: { token: null, errorMessage: "SignIn failed" }
       })
     }
   }
-}
+};
 
 const signOut = (dispatch) => {
   return async () => {
@@ -74,6 +74,12 @@ const signOut = (dispatch) => {
     await AsyncStorage.removeItem("token");
     dispatch({ type: 'signout' })
 
+  }
+}
+
+const clearErrorMessage = (dispatch) => {
+  return () => {
+    dispatch({ type: 'clearError' })
   }
 }
 
@@ -90,6 +96,6 @@ const isSignIn = (dispatch) => {
 
 export const { Provider, Context } = createDataContext(
   reducer,
-  { signUp, signIn, signOut, isSignIn },
+  { signUp, signIn, signOut, isSignIn, clearErrorMessage },
   getDefaults()
 );
