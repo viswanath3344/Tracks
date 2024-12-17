@@ -11,6 +11,7 @@ import SignUpScreen from './source/screens/SignUpScreen';
 
 import TrackDetailScreen from './source/screens/TrackDetailScreen';
 import TrackListScreen from './source/screens/TrackListScreen';
+import TrackCreateScreen from './source/screens/TrackCreateScreen';
 import AccountScreen from './source/screens/AccountScreen';
 
 import { Context as AuthContext, Provider as AuthProvider } from './source/context/authContext';
@@ -47,6 +48,7 @@ const App = function App() {
         ) : (
           <Tab.Navigator screenOptions={{headerShown: false}}>
             <Tab.Screen name='Tracks' component={TrackComponent} />
+            <Tab.Screen name='Create Track' component={TrackCreateScreen} />
             <Tab.Screen name='Account' component={AccountScreen} />
           </Tab.Navigator>
         )
