@@ -9,12 +9,18 @@ const AccountScreen = () => {
     return <View>
         <Text>Account Screen </Text>
         <Button 
-         title={"signout"}
-         onPress={() => {signOut()}}
+         title={"Sign out"}
+         style = {styles.signOut}
+         onPress={signOut}
         />
     </View>
 }
 
-const styleSheet = StyleSheet.create({});
+const styles = StyleSheet.create({
+    signOut: {
+        marginHorizontal: 16, 
+        marginTop: 8
+    }
+});
 
 export default AccountScreen;
