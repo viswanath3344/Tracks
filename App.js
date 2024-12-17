@@ -21,7 +21,7 @@ const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
 const TrackComponent = () => {
-  return <Stack.Navigator screenOptions={{ headerShown: false }}>
+  return <Stack.Navigator screenOptions={{headerShown: false}}>
     <Stack.Screen name='TrackList' component={TrackListScreen} />
     <Stack.Screen name='TrackDetail' component={TrackDetailScreen} />
   </Stack.Navigator>
@@ -45,7 +45,7 @@ const App = function App() {
             <Stack.Screen name='SignIn' component={SignInScreen} />
           </Stack.Navigator>
         ) : (
-          <Tab.Navigator screen>
+          <Tab.Navigator screenOptions={{headerShown: false}}>
             <Tab.Screen name='Tracks' component={TrackComponent} />
             <Tab.Screen name='Account' component={AccountScreen} />
           </Tab.Navigator>
@@ -60,12 +60,3 @@ export default () => {
     <App />
   </AuthProvider>
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});

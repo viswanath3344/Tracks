@@ -1,26 +1,24 @@
 import { Button } from "@rneui/base";
 import React, { useContext } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { SafeAreaView, StyleSheet, Text, View } from "react-native";
 
 import { Context as AuthContext } from "../context/authContext";
+import Spacer from "../components/spacer";
 
 const AccountScreen = () => {
     const {signOut} = useContext(AuthContext);
-    return <View>
+    return <SafeAreaView >
         <Text>Account Screen </Text>
+        <Spacer>
         <Button 
          title={"Sign out"}
-         style = {styles.signOut}
          onPress={signOut}
         />
-    </View>
+        </Spacer>
+    </SafeAreaView>
 }
 
 const styles = StyleSheet.create({
-    signOut: {
-        marginHorizontal: 16, 
-        marginTop: 8
-    }
 });
 
 export default AccountScreen;

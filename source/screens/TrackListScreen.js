@@ -1,8 +1,9 @@
 import React from "react";
-import { Button, StyleSheet, Text, View } from "react-native";
+import { Button, SafeAreaView, StyleSheet, Text, View } from "react-native";
+
 
 const TrackListScreen = ({navigation}) => {
-    return <View>
+    return <SafeAreaView>
         <Text>Track List Screen </Text>
         <Button 
         title="Track Detail"
@@ -10,7 +11,7 @@ const TrackListScreen = ({navigation}) => {
          navigation.navigate("TrackDetail")
         }}
         />
-    </View>
+    </SafeAreaView>
 }
 
 const styleSheet = StyleSheet.create({});
